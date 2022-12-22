@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from joblib import load
 from .models import District
-recommend = load("./SavedModels/Crop_recommendation_model.sav")
+recommend = load("SavedModels/Crop_recommendation_model.sav")
 soil = ['Alluvial', 'Black', 'Clayey', 'Laterite', 'Loamy', 'Red', 'Sandy']
 season_list = ['Kharif', 'Rabi']
 crops = ['banana', 'coconut', 'tea', 'rubber', 'tapioca', 'coffee', 'cardamom', 'betel', 'bamboo','ladiesfinger','brinjal',
@@ -49,7 +49,7 @@ def results(request):
     crop_temp = crop_temp[:3]
     for i in crops:
         if(i[:3] == crop_temp):
-            yield_predict = load("./SavedModels/{0}.sav".format(i))
+            yield_predict = load("SavedModels/{0}.sav".format(i))
             break
 
     yield_list = [area, 50, soil_index]
