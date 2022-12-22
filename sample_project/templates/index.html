@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Crop Recommendation & Yield Prediction</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="contact1">
+		<div class="container-contact1">
+			<div class="contact1-pic js-tilt" data-tilt>
+				<span class="contact1-form-title" style="text-align: center;font-size: larger;">
+					Crop Recommendation <br> & <br> Yield Prediction
+				</span>
+				<img src="{% static 'images/wheat.jpg' %}" alt="IMG">
+			</div>
+
+			<form class="contact1-form validate-form" method="get" enctype="multipart/form-data" action="results">
+				{% csrf_token %}
+				<span class="contact1-form-title" style = "top:10%;">
+					Fill in the details
+				</span>
+
+				<div class="wrap-input1 validate-input" data-validate = "Land Area is required">
+					<span class="contact1-form-title" style="text-align: left;font-size: larger;padding-bottom: 7.5px;">
+						Land Area (Ha):
+					</span>
+					<input class="input1" type="number" name="area" placeholder="Land Area" step =".01" required>
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div style = "padding-bottom: 5%;" data-validate = "District is required">
+					<span class="contact1-form-title" style="text-align: left;font-size: larger;padding-bottom: 15px;">
+						District:
+					</span><select name = "district" class = 'input1' style="width:100%;">
+						<option value="none" selected disabled hidden>Select an Option</option>
+						<option value = "Ariyalur">Ariyalur</option>
+						<option value = "Chengalpet">Chengalpattu</option>
+						<option value = "Chennai">Chennai</option>
+						<option value = "Coimabatore">Coimabatore</option>
+						<option value = "Cuddalore">Cuddalore</option>
+						<option value = "Dharmapuri">Dharmapuri</option>
+						<option value = "Dindugal">Dindugal</option>
+						<option value = "Erode">Erode</option>
+						<option value = "Kallakurichi">Kallakurichi</option>
+						<option value = "Kanchipuram">Kanchipuram</option>
+						<option value = "Kanyakumari">Kanyakumari</option>
+						<option value = "Karur">Karur</option>
+						<option value = "Krishnagiri">Krishnagiri</option>
+						<option value = "Madurai">Madurai</option>
+						<option value = "Nagapattinam">Nagapattinam</option>
+						<option value = "Namakkal">Namakkal</option>
+						<option value = "Nilgiris">Nilgiris</option>
+						<option value = "Perambalur">Perambalur</option>
+						<option value = "Pudukkottai">Pudukkottai</option>
+						<option value = "Ramanathapuram">Ramanathapuram</option>
+						<option value = "Ranipet">Ranipet</option>
+						<option value = "Salem">Salem</option>
+						<option value = "Sivagangai">Sivagangai</option>
+						<option value = "Tenkasi">Tenkasi</option>
+						<option value = "Thanjavur">Thanjavur</option>
+						<option value = "Theni">Theni</option>
+						<option value = "Tuticorin">Tuticorin</option>
+						<option value = "Thiruchirapalli">Thiruchirapalli</option>
+						<option value = "Tirunelveli">Tirunelveli</option>
+						<option value = "Tirupathur">Tirupathur</option>
+						<option value = "Tiruppur">Tiruppur</option>
+						<option value = "Tiruvallur">Tiruvallur</option>
+						<option value = "Tiruvannamalai">Tiruvannamalai</option>
+						<option value = "Tiruvarur">Tiruvarur</option>
+						<option value = "Vellore">Vellore</option>
+						<option value = "Villupuram">Villupuram</option>
+						<option value = "Virudhunagar">Virudhunagar</option>
+						<option value = "Mayiladuthurai">Mayiladuthurai</option>
+						</select>
+				</div>
+				<div style = "padding-bottom: 5%;" data-validate = "Season is required">
+					<span class="contact1-form-title" style="text-align: left;font-size: larger;padding-bottom: 15px;">
+						Season:
+					</span><select name = "season" class = 'input1' style="width:100%;">
+						<option value="none" selected disabled hidden>Select an Option</option>
+						<option value = "Kharif">Kharif</option>
+						<option value = "Rabi">Rabi</option>
+						</select>
+				</div>
+				
+				<div style = "padding-bottom: 7.5%;" data-validate = "Soil type is required">
+					<span class="contact1-form-title" style="text-align: left;font-size: larger;padding-bottom: 15px;">
+						Soil type:
+					</span><select name = "soil_type" class = 'input1' style="width:100%;">
+						<option value="none" selected disabled hidden>Select an Option</option>
+						<option value = "Alluvial">Alluvial soil</option>
+						<option value = "Black">Black soil</option>
+						<option value = "Clayey">Clayey soil</option>
+						<option value = "Laterite">Laterite soil</option>
+						<option value = "Loamy">Loamy soil</option>
+						<option value = "Red">Red soil</option>
+						<option value = "Sandy">Sandy soil</option>
+						</select>
+					</div>
+					<span class="contact1-form-title" style="text-align: left;font-size: larger;padding-bottom: 15px;">
+					Soil Parameters:
+				</span>
+				<div class="wrap-input1 validate-input" data-validate = "Valid pH value is required">
+					<input class="input1" type="number" name="ph" placeholder="pH" step = ".01" required>
+					<span class="shadow-input1"></span>
+				</div>
+				<div class="wrap-input1 validate-input" data-validate = "Valid nitrogen value is required">
+					<input class="input1" type="number" name="nitrogen" placeholder="Nitrogen (Kg/Ha)" step = ".01" required>
+					<span class="shadow-input1"></span>
+				</div>
+				<div class="wrap-input1 validate-input" data-validate = "Valid phosphorus value is required" step = ".01" required>
+					<input class="input1" type="number" name="phosphorus" placeholder="Phosphorus (Kg/Ha)">
+					<span class="shadow-input1"></span>
+				</div> 
+				<div class="wrap-input1 validate-input" data-validate = "Valid potassium value is required" step = ".01" required>
+					<input class="input1" type="number" name="potassium" placeholder="Potassium (Kg/Ha)">
+					<span class="shadow-input1"></span>
+				</div>
+				
+				
+				
+
+				<div class="container-contact1-form-btn">
+					<button class="contact1-form-btn">
+						<span>
+							Submit
+							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>
